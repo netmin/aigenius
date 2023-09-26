@@ -7,42 +7,42 @@ import {useRouter} from "next/navigation";
 
 const tools = [
     {
-        label: "Conversation",
+        label: "Диалоги",
         icon: MessagesSquare,
         href: "/conversation",
         color: "text-violet-500",
         bgColor: "bg-violet-500/10"
     },
     {
-        label: "Image Generation",
+        label: "Текст в картинку",
         icon: ImageIcon,
         href: "/image",
         color: "text-pink-700",
         bgColor: "bg-pink-700/10"
     },
     {
-        label: "Video Generation",
+        label: "Текст в видео",
         icon: VideoIcon,
         href: "/video",
         color: "text-orange-700",
         bgColor: "bg-orange-700/10"
     },
     {
-        label: "Music Generation",
+        label: "Текст в музыку",
         icon: MusicIcon,
         href: "/music",
         color: "text-emerald-500",
         bgColor: "bg-emerald-500/10"
     },
     {
-        label: "Code Generation",
+        label: "Генерация кода",
         icon: Code,
         href: "/code",
         color: "text-green-700",
         bgColor: "bg-green-700/10"
     },
     {
-        label: "Settings",
+        label: "Настройки",
         icon: Settings,
         href: "/settings",
     }
@@ -52,10 +52,10 @@ const DashboardPage = () => {
     return (
         <div className="mb-8 space-y-4">
            <h2 className="text-2xl md:text-4xl font-bold text-center">
-               Explore the Power AI
+               Исследуйте мощь ИИ
            </h2>
             <p className="text-muted-foreground font-light text-sm md:text-lg text-center">
-                Chat with the smartest AI - Experience the power of AI
+               Общайтесь с самым умным ИИ - Почувствуйте мощь искусственного интеллекта
             </p>
             <div className="px-4 md:px-20 lg:px-32 space-y-4">
                 {tools.map((tool) => (

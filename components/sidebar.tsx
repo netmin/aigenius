@@ -13,43 +13,43 @@ const poppins = Montserrat ({ weight: '600', subsets: ['latin'] });
 
 const routes = [
     {
-        label: "Dashboard",
+        label: "Панель управления",
         icon: LayoutDashboard,
         href: "/dashboard",
         color: "text-sky-500",
     },
     {
-        label: "Conversation",
+        label: "Диалоги",
         icon: MessagesSquare,
         href: "/conversation",
         color: "text-violet-500",
     },
     {
-        label: "Image Generation",
+        label: "Текст в картинку",
         icon: ImageIcon,
         href: "/image",
         color: "text-pink-700",
     },
     {
-        label: "Video Generation",
+        label: "Текст в видео",
         icon: VideoIcon,
         href: "/video",
         color: "text-orange-700",
     },
     {
-        label: "Music Generation",
+        label: "Текст в музыку",
         icon: MusicIcon,
         href: "/music",
         color: "text-emerald-500",
     },
     {
-        label: "Code Generation",
+        label: "Генерация кода",
         icon: Code,
         href: "/code",
         color: "text-green-700",
     },
     {
-        label: "Settings",
+        label: "Настройки",
         icon: Settings,
         href: "/settings",
     }
@@ -69,7 +69,7 @@ export const Sidebar = ({apiLimitCount = 0}: SidebarProps) => {
             <Image fill alt="Logo" src="/logo.png" />
           </div>
           <h1 className={cn("text-2xl font-bold", poppins.className)}>
-            Genius
+            AIGenius
           </h1>
         </Link>
         <div className="space-y-1">
