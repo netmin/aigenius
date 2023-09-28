@@ -12,11 +12,11 @@ export async function POST(req: Request) {
             return new NextResponse(null, {status: 400});
         }
 
-        const {event, object, payment_method} = body;
+        const {event, object} = body;
 
         // @ts-ignore
         let userSubscription = await prismadb.userSubscription.findUnique({
-            where: {paymentMethodId: payment_method.id},
+            where: {paymentMethodId: object.payment_method.id},
         });
 
         switch (event) {
