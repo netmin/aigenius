@@ -17,3 +17,25 @@ model UserApiLimit {
   createAt DateTime @default(now())
   updateAt DateTime @updatedAt
 }
+
+enum SubscriptionStatus {
+  ACTIVE
+  INACTIVE
+  CANCELED
+  PENDING
+  FAILED
+}
+
+model UserSubscription {
+  id                String             @id @default(cuid())
+  userId            String             @unique
+  payment_method_id String?            @unique @map(name: "payment_method.id")
+  expirationDate    DateTime
+  status            SubscriptionStatus
+  createdAt         DateTime           @default(now()) @map(name: "created_at")
+  updatedAt         DateTime           @updatedAt @map(name: "updated_at")
+  price             Decimal
+  currency          String
+  description       String
+  lastPaymentDate   DateTime?
+}
