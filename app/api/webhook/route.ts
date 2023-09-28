@@ -13,6 +13,7 @@ export async function POST(req: Request) {
 
         const {event, object} = body;
 
+        // @ts-ignore
         let userSubscription = await prismadb.userSubscription.findUnique({
             where: {paymentId: object.id},
         });
