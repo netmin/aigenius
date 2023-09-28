@@ -30,7 +30,7 @@ export async function GET() {
                     "currency": "RUB"
                 },
                 "capture": true,
-                "payment_method_id": userSubscription.payment_method_id,
+                "payment_method_id": userSubscription.paymentMethodId,
                 "description": "AIGenius PRO",
             })
 
