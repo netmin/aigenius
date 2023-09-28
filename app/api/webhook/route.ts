@@ -11,8 +11,13 @@ export async function POST(req: Request) {
             console.error("Invalid notification body", body);
             return new NextResponse(null, {status: 400});
         }
-
+        
         const {event, object} = body;
+
+        if (!object.metadata || !object.metadata.userId) {
+            console.error("metadata or userId is undefined in the received object", object);
+            return new NextResponse(null, {status: 400}); // Bad Request
+        }
 
         // @ts-ignore
         let userSubscription = await prismadb.userSubscription.findUnique({

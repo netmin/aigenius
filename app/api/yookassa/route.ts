@@ -32,6 +32,9 @@ export async function GET() {
                 "capture": true,
                 "payment_method_id": userSubscription.paymentMethodId,
                 "description": "AIGenius PRO",
+                "metadata": {
+                    "userId": userId
+                }
             })
 
             return new NextResponse(JSON.stringify({url: payment.confirmation.confirmation_url}))
