@@ -11,11 +11,11 @@ export async function POST(req: Request) {
             return new NextResponse(null, {status: 400});
         }
 
-        const {event, object} = body;
+        const {event, object, payment_method} = body;
 
         // @ts-ignore
         let userSubscription = await prismadb.userSubscription.findUnique({
-            where: {paymentId: object.id},
+            where: {paymentMethodId: payment_method.id},
         });
 
         switch (event) {
@@ -35,7 +35,7 @@ export async function POST(req: Request) {
                         data: {
                             ...newData,
                             userId: object.metadata.userId,
-                            payment_method_id: object.payment_method.id,
+                            paymentMethodId: object.payment_method.id,
                         },
                     });
                 }

@@ -27,15 +27,15 @@ enum SubscriptionStatus {
 }
 
 model UserSubscription {
-  id                String             @id @default(cuid())
-  userId            String             @unique
-  payment_method_id String?            @unique @map(name: "payment_method.id")
-  expirationDate    DateTime
-  status            SubscriptionStatus
-  createdAt         DateTime           @default(now()) @map(name: "created_at")
-  updatedAt         DateTime           @updatedAt @map(name: "updated_at")
-  price             Decimal
-  currency          String
-  description       String
-  lastPaymentDate   DateTime?
+  id              String             @id @default(cuid())
+  userId          String             @unique
+  paymentMethodId String?            @unique @map(name: "payment_method.id")
+  expirationDate  DateTime
+  status          SubscriptionStatus
+  createdAt       DateTime           @default(now()) @map(name: "created_at")
+  updatedAt       DateTime           @updatedAt @map(name: "updated_at")
+  price           Decimal
+  currency        String
+  description     String
+  lastPaymentDate DateTime?
 }
