@@ -1,6 +1,6 @@
 import {NextResponse} from "next/server";
 import prismadb from "@/lib/prismadb"
-import { SubscriptionStatus } from '@prisma/client';
+import {SubscriptionStatus} from '@prisma/client';
 
 export async function POST(req: Request) {
     try {
@@ -21,9 +21,17 @@ export async function POST(req: Request) {
 
         switch (event) {
             case "payment.succeeded":
+                const createdDate = new Date(object.created_at); // Преобразование строки даты в объект Date
+                const expirationDate = new Date(createdDate); // Создание нового объекта Date, чтобы не изменять исходный
+                expirationDate.setDate(createdDate.getDate() + 30); // Добавление 30 дней к createdDate
+
                 const newData = {
                     status: SubscriptionStatus.ACTIVE,
                     lastPaymentDate: new Date(object.created_at),
+                    expirationDate: expirationDate,
+                    price: object.amount.value,
+                    currency: object.amount.currency,
+                    description: object.description,
                 };
 
                 if (userSubscription) {
