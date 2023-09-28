@@ -23,7 +23,7 @@ export async function GET() {
             }
         })
 
-        if (userSubscription && userSubscription.payment_method_id) {
+        if (userSubscription && userSubscription.paymentMethodId) {
             const payment = await checkout.createPayment({
                 "amount": {
                     "value": "2.00",
