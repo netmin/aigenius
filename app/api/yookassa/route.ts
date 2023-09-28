@@ -34,7 +34,7 @@ export async function GET() {
                 "description": "AIGenius PRO",
                 "metadata": {
                     "userId": userId
-                }
+                },
             })
 
             return new NextResponse(JSON.stringify({url: payment.confirmation.confirmation_url}))
@@ -52,7 +52,10 @@ export async function GET() {
             },
             "capture": true,
             "description": "AIGenius PRO",
-            "save_payment_method": true
+            "save_payment_method": true,
+            "metadata": {
+                    "userId": userId
+                },
         })
 
         return new NextResponse(JSON.stringify({url: payment.confirmation.confirmation_url}))

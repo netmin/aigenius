@@ -11,7 +11,7 @@ export async function POST(req: Request) {
             console.error("Invalid notification body", body);
             return new NextResponse(null, {status: 400});
         }
-        
+
         const {event, object} = body;
 
         if (!object.metadata || !object.metadata.userId) {
