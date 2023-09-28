@@ -1,5 +1,6 @@
 import {NextResponse} from "next/server";
-import prismadb from "@/lib/prismadb";
+import prismadb from "@/lib/prismadb"
+import { SubscriptionStatus } from '@prisma/client';
 
 export async function POST(req: Request) {
     try {
@@ -21,7 +22,7 @@ export async function POST(req: Request) {
         switch (event) {
             case "payment.succeeded":
                 const newData = {
-                    status: "ACTIVE",
+                    status: SubscriptionStatus.ACTIVE,
                     lastPaymentDate: new Date(object.created_at),
                 };
 
@@ -44,7 +45,7 @@ export async function POST(req: Request) {
                 if (userSubscription) {
                     await prismadb.userSubscription.update({
                         where: {id: userSubscription.id},
-                        data: {status: "CANCELED"},
+                        data: {status: SubscriptionStatus.CANCELED},
                     });
                 }
                 break;
