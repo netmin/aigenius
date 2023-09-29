@@ -27,6 +27,7 @@ const TermsComponent = () => {
     return (
         <div>
             <h1>Условия и правила</h1>
+            <div className="text-muted-foreground text-sm">
             {termsSections.map((section, index) =>
                 <section key={index}>
                     <h2>{section.title}</h2>
@@ -40,6 +41,7 @@ const TermsComponent = () => {
                     </dl>
                 </section>
             )}
+            </div>
         </div>
     );
 }
