@@ -1,6 +1,7 @@
 import {Phone, Settings} from "lucide-react";
 import Heading from "@/components/heading";
 import React from "react";
+import TermsComponent from "@/components/terms";
 
 
 const SettingsPage = async () => {
@@ -17,13 +18,14 @@ const SettingsPage = async () => {
     return (
         <div>
             <Heading
-                title="Контакты"
-                description="Реквизиты и контакты"
+                title="Контакты и Правила"
+                description="Реквизиты и правила"
                 icon={Phone}
                 iconColor="text-gray-700"
                 bgColor="bg-gray-700/10"
             />
             <div className="px-4 lg:px-8 space-y-4">
+                 <TermsComponent />
                  <h1>Контакты</h1>
                 <div className="text-muted-foreground text-sm">
                     <p><strong>Email:</strong> aigenius-help@proton.me</p>
@@ -39,8 +41,8 @@ const SettingsPage = async () => {
                         </React.Fragment>
                     ))}
                 </dl>
-
                 </div>
+
             </div>
         </div>
     );

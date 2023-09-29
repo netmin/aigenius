@@ -47,7 +47,7 @@ const tools = [
         href: "/settings",
     },
         {
-        label: "Контакты",
+        label: "Контакты и правила",
         icon: Phone,
         href: "/contacts",
     }

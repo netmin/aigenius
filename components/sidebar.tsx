@@ -54,7 +54,7 @@ const routes = [
         href: "/settings",
     },
         {
-        label: "Контакты",
+        label: "Контакты и правила",
         icon: Phone,
         href: "/contacts",
     }
