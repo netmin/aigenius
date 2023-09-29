@@ -1,6 +1,6 @@
 "use client";
 
-import {ArrowRight, Code, ImageIcon, MessagesSquare, MusicIcon, Settings, VideoIcon} from "lucide-react";
+import {ArrowRight, Code, ImageIcon, MessagesSquare, MusicIcon, Phone, Settings, VideoIcon} from "lucide-react";
 import {Card} from "@/components/ui/card";
 import {cn} from "@/lib/utils";
 import {useRouter} from "next/navigation";
@@ -45,6 +45,11 @@ const tools = [
         label: "Настройки",
         icon: Settings,
         href: "/settings",
+    },
+        {
+        label: "Контакты",
+        icon: Phone,
+        href: "/contacts",
     }
 ]
 const DashboardPage = () => {
