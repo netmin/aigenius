@@ -1,4 +1,6 @@
 "use client";
+
+import {Spinner} from "@nextui-org/react";
 import {
     Dialog,
     DialogContent,
@@ -56,8 +58,8 @@ export const ProModal = () => {
     const onSubscribe = async () => {
         try {
             setLoading(true)
-            const response = axios.get("/api/yookassa")
-            window.location.href = (await response).data.url
+            const response = await axios.get("/api/yookassa")
+            window.location.href = response.data.url
         } catch (error) {
             console.log("YOOKASSA_ERROR", error)
         } finally {
@@ -70,10 +72,10 @@ export const ProModal = () => {
                 <DialogHeader>
                     <DialogTitle className="flex justify-center items-center flex-col gap-y-4 pb-2">
                         <div className="flex items-center gap-x-2 font-bold py-1">
-                        Повышение до AIGenius
-                        <Badge className="uppercase text-sm py-1" variant="premium">
-                            pro
-                        </Badge>
+                            Повышение до AIGenius
+                            <Badge className="uppercase text-sm py-1" variant="premium">
+                                pro
+                            </Badge>
                         </div>
                     </DialogTitle>
                     <DialogDescription className="text-center pt-2 space-y-2 text-zinc-900 font-medium">
@@ -83,8 +85,8 @@ export const ProModal = () => {
                                 className="pt-3 border-black/5 flex items-center justify-between"
                             >
                                 <div className="flex items-center gap-x-4">
-                                    <div className={cn("p-2 w-fit rounded-md",  tool.bgColor )}>
-                                         <tool.icon className={cn("w-6 h-6", tool.color)} />
+                                    <div className={cn("p-2 w-fit rounded-md", tool.bgColor)}>
+                                        <tool.icon className={cn("w-6 h-6", tool.color)}/>
                                     </div>
                                     <div className="font-semibold text-sm">
                                         {tool.label}
@@ -102,8 +104,17 @@ export const ProModal = () => {
                         variant="premium"
                         className="w-full"
                     >
-                        Улучшить за 499 рублей в месяц
-                        <Zap className="w-4 h-4 ml-2 fill-white" />
+                        {Loading ? (
+                            <div
+                                className="flex items-center space-x-2">
+                                <span>Секунду...</span>
+                            </div>
+                        ) : (
+                            <>
+                                Улучшить за 499 рублей в месяц
+                                <Zap className="w-4 h-4 ml-2 fill-white"/>
+                            </>
+                        )}
                     </Button>
                 </DialogFooter>
             </DialogContent>

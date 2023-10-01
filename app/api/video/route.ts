@@ -2,6 +2,7 @@ import {NextResponse} from "next/server";
 import {auth} from "@clerk/nextjs";
 import Replicate from "replicate";
 import {checkApiLimit, incrementApiLimit} from "@/lib/api-limit";
+import {checkSubscription} from "@/lib/subscription";
 
 
 const replicate = new Replicate({
@@ -24,8 +25,9 @@ export async function POST(req: Request) {
         }
 
         const freeTrial = await checkApiLimit()
+        const isPro = await checkSubscription()
 
-        if (!freeTrial) {
+        if (!freeTrial && !isPro) {
             return new NextResponse("Free trial has expired", {status: 403})
         }
 
@@ -36,9 +38,11 @@ export async function POST(req: Request) {
                     prompt
                 }
             }
-        );
-        await incrementApiLimit()
-        
+        )
+        if (!isPro) {
+            await incrementApiLimit()
+        }
+
         return NextResponse.json(response)
     } catch (error) {
         console.log("[VIDEO_ERROR", error)
