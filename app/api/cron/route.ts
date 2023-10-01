@@ -1,37 +1,10 @@
-import {auth} from "@clerk/nextjs";
 import prismadb from "@/lib/prismadb";
-import { SubscriptionStatus } from "@prisma/client";
+import {SubscriptionStatus} from "@prisma/client";
 import {checkout} from "@/lib/yookassa";
+import {NextResponse} from "next/server";
 
-const DAY_IN_MS = 86_400_000;
-
-export const checkSubscription = async (): Promise<boolean> => {
-    const { userId } = auth();
-    if (!userId) {
-        return false;
-    }
-
-  const userSubscription = await prismadb.userSubscription.findUnique({
-    where: {
-      userId: userId,
-    },
-    select: {
-      paymentMethodId: true,
-      expirationDate: true,
-      status: true,
-      price: true,
-    },
-  })
-
-  if (!userSubscription) {
-    return false;
-  }
-
-  return Boolean(userSubscription.paymentMethodId &&
-      (userSubscription.expirationDate?.getTime()! + DAY_IN_MS > Date.now()));
-};
-
-export async function handleSubscriptions() {
+export async function GET() {
+    console.log('START CRON')
     const currentDate = new Date();
     const subscriptions = await prismadb.userSubscription.findMany({
         where: {
@@ -57,9 +30,11 @@ export async function handleSubscriptions() {
                 "payment_method_id": subscription.paymentMethodId,
                 "description": "AIGenius PRO",
             })
+            return NextResponse.json({ ok: true });
 
         } catch (error) {
             console.error("Error handling subscription", subscription.id, error);
+            return new NextResponse("Internal Error", {status: 500});
         }
     }
 }

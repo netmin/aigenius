@@ -26,9 +26,9 @@ export async function POST(req: Request) {
 
         switch (event) {
             case "payment.succeeded":
-                const createdDate = new Date(object.created_at); // Преобразование строки даты в объект Date
-                const expirationDate = new Date(createdDate); // Создание нового объекта Date, чтобы не изменять исходный
-                expirationDate.setDate(createdDate.getDate() + 30); // Добавление 30 дней к createdDate
+                const createdDate = new Date(object.created_at);
+                const expirationDate = new Date(createdDate);
+                expirationDate.setDate(createdDate.getDate() + 30);
 
                 const newData = {
                     status: SubscriptionStatus.ACTIVE,
