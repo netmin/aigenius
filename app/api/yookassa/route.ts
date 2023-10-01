@@ -62,4 +62,4 @@ export async function GET() {
         console.log("[YOOKASSA_ERROR]", error);
         return new NextResponse("Internal Error", {status: 500});
     }
-};
+}

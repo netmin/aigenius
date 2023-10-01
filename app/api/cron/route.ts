@@ -6,6 +6,7 @@ import {NextResponse} from "next/server";
 export async function GET() {
     console.log('START CRON')
     const currentDate = new Date();
+    const errors = [];
     const subscriptions = await prismadb.userSubscription.findMany({
         where: {
             status: SubscriptionStatus.ACTIVE,
@@ -21,7 +22,7 @@ export async function GET() {
             continue;
         }
         try {
-           await checkout.createPayment({
+            await checkout.createPayment({
                 "amount": {
                     "value": subscription.price.toString(),
                     "currency": subscription.currency
@@ -30,11 +31,17 @@ export async function GET() {
                 "payment_method_id": subscription.paymentMethodId,
                 "description": "AIGenius PRO",
             })
-            return NextResponse.json({ ok: true });
-
         } catch (error) {
-            console.error("Error handling subscription", subscription.id, error);
-            return new NextResponse("Internal Error", {status: 500});
+            if (typeof error === 'object' && error !== null && 'message' in error) {
+                errors.push(`Error handling subscription ${subscription.id}: ${error.message}`);
+            } else {
+                errors.push(`Error handling subscription ${subscription.id}: ${String(error)}`);
+            }
         }
     }
+    if (errors.length > 0) {
+        return NextResponse.json({ok: false, errors: errors});
+    }
+
+    return NextResponse.json({ok: true});
 }
