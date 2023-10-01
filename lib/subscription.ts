@@ -27,6 +27,6 @@ export const checkSubscription = async () => {
     return false;
   }
 
-  return userSubscription.paymentMethodId &&
-      userSubscription.expirationDate?.getTime()! + DAY_IN_MS > Date.now();
+  return Boolean(userSubscription.paymentMethodId &&
+      (userSubscription.expirationDate?.getTime()! + DAY_IN_MS > Date.now()));
 };
