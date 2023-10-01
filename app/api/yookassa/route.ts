@@ -4,7 +4,6 @@ import {NextResponse} from "next/server";
 import prismadb from "@/lib/prismadb";
 import {checkout} from "@/lib/yookassa";
 import {absoluteUrl} from "@/lib/utils";
-import useSWRSubscription from "swr/subscription";
 
 const settingsUrl = absoluteUrl("/settings");
 
