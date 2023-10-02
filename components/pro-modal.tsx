@@ -12,7 +12,7 @@ import {useProModal} from "@/hooks/use-pro-modal";
 import {Badge} from "@/components/ui/badge";
 import {Check, Code, ImageIcon, MessagesSquare, MusicIcon, Settings, VideoIcon, Zap} from "lucide-react";
 import {Card} from "@/components/ui/card";
-import {absoluteUrl} from "@/lib/utils";
+import {absoluteUrl, cn} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
 import axios from "axios";
 import {useState} from "react";
