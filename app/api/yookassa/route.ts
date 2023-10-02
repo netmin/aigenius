@@ -1,3 +1,4 @@
+import { v4 as uuidv4 } from 'uuid';
 import {auth, currentUser} from "@clerk/nextjs";
 import {NextResponse} from "next/server";
 
@@ -22,10 +23,13 @@ export async function GET() {
             }
         })
 
+        const idempotenceKey = uuidv4()
+
         if (userSubscription && userSubscription.paymentMethodId) {
+
             const payment = await checkout.createPayment({
                 "amount": {
-                    "value": "2.00",
+                    "value": "499.00",
                     "currency": "RUB"
                 },
                 "capture": true,
@@ -34,11 +38,10 @@ export async function GET() {
                 "metadata": {
                     "userId": userId
                 },
-            })
+            }, idempotenceKey)
 
-            return new NextResponse(JSON.stringify({url: payment.confirmation.confirmation_url}))
+            return NextResponse.redirect(new URL(settingsUrl))
         }
-
 
         const payment = await checkout.createPayment({
             "amount": {
@@ -53,9 +56,9 @@ export async function GET() {
             "description": "AIGenius PRO",
             "save_payment_method": true,
             "metadata": {
-                    "userId": userId
-                },
-        })
+                "userId": userId
+            },
+        }, idempotenceKey)
 
         return new NextResponse(JSON.stringify({url: payment.confirmation.confirmation_url}))
     } catch (error) {
