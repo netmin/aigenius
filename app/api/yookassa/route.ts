@@ -6,9 +6,10 @@ import prismadb from "@/lib/prismadb";
 import {checkout} from "@/lib/yookassa";
 import {absoluteUrl} from "@/lib/utils";
 
-const settingsUrl = absoluteUrl("/settings");
+
 
 export async function GET() {
+    const settingsUrl = absoluteUrl("/settings");
     try {
         const {userId} = auth();
         const user = await currentUser();
