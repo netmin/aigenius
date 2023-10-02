@@ -12,7 +12,7 @@ import {useProModal} from "@/hooks/use-pro-modal";
 import {Badge} from "@/components/ui/badge";
 import {Check, Code, ImageIcon, MessagesSquare, MusicIcon, Settings, VideoIcon, Zap} from "lucide-react";
 import {Card} from "@/components/ui/card";
-import {cn} from "@/lib/utils";
+import {absoluteUrl} from "@/lib/utils";
 import {Button} from "@/components/ui/button";
 import axios from "axios";
 import {useState} from "react";
@@ -57,8 +57,9 @@ export const ProModal = () => {
     const onSubscribe = async () => {
         try {
             setLoading(true)
-            const response = await axios.get("/api/yookassa")
-            window.location.href = response.data.url
+            const {data} = await axios.get("/api/yookassa")
+            window.location.href = data.url ?? absoluteUrl("/dashboard")
+
         } catch (error) {
             console.log("YOOKASSA_ERROR", error)
         } finally {

@@ -28,7 +28,7 @@ export async function GET() {
 
         if (userSubscription && userSubscription.paymentMethodId) {
 
-            const payment = await checkout.createPayment({
+            await checkout.createPayment({
                 "amount": {
                     "value": "499.00",
                     "currency": "RUB"
@@ -41,7 +41,7 @@ export async function GET() {
                 },
             }, idempotenceKey)
 
-            return NextResponse.redirect(new URL(settingsUrl))
+             return NextResponse.json({ok: true});
         }
 
         const payment = await checkout.createPayment({

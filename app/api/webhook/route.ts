@@ -5,7 +5,6 @@ import {SubscriptionStatus} from '@prisma/client';
 export async function POST(req: Request) {
     try {
         const body = await req.json();
-        console.log(body);
 
         if (!body.event || !body.object || !body.object.id) {
             console.error("Invalid notification body", body);
@@ -65,7 +64,6 @@ export async function POST(req: Request) {
             default:
                 console.log("Unhandled event type", event);
         }
-
         return new NextResponse(null, {status: 200});
     } catch (error) {
         console.error("Error handling YooKassa notification", error);
