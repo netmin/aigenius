@@ -4,7 +4,6 @@ import {checkout} from "@/lib/yookassa";
 import {NextResponse} from "next/server";
 
 export async function GET() {
-    console.log('START CRON')
     const currentDate = new Date();
     const errors = [];
     const subscriptions = await prismadb.userSubscription.findMany({

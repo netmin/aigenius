@@ -1,11 +1,10 @@
-"use client";
+"use client"
 
-import axios from "axios";
-import { useState } from "react";
-import { Zap } from "lucide-react";
-import { toast } from "react-hot-toast";
-
-import { Button } from "@/components/ui/button";
+import { useProModal } from "@/hooks/use-pro-modal";
+import { useCancelProModal } from "@/hooks/use-cancel-pro-modal";
+import {useState} from "react";
+import {Button} from "@/components/ui/button";
+import toast from "react-hot-toast";
 
 export const SubscriptionButton = ({
   isPro = false
@@ -13,25 +12,32 @@ export const SubscriptionButton = ({
   isPro: boolean;
 }) => {
   const [loading, setLoading] = useState(false);
+  const proModal = useProModal();
+  const cancelProModal = useCancelProModal();
 
   const onClick = async () => {
     try {
       setLoading(true);
-
-      const response = await axios.get("/api/stripe");
-
-      window.location.href = response.data.url;
     } catch (error) {
-      toast.error("Something went wrong");
+      toast.error("Что-то пошло не так");
     } finally {
       setLoading(false);
     }
   };
 
+  const openProModal = () => {
+    isPro ? cancelProModal.onOpen() : proModal.onOpen();
+  };
+
   return (
-    <Button variant={isPro ? "default" : "premium"} disabled={loading} onClick={onClick} >
-      {isPro ? "Управление подпиской" : "Обновить"}
-      {!isPro && <Zap className="w-4 h-4 ml-2 fill-white" />}
+    <Button onClick={openProModal} variant="premium" disabled={loading} >
+      {loading ? (
+        <div className="flex items-center space-x-2">
+          <span>Обработка...</span>
+        </div>
+      ) : (
+        isPro ? "Отменить подписку" : "Обновить"
+      )}
     </Button>
-  )
+  );
 };

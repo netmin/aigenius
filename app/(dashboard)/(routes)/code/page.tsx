@@ -33,10 +33,6 @@ const CodePage = () => {
     })
 
     const isLoading = form.formState.isSubmitting
-
-    console.log(isLoading)
-    console.log(form)
-
     const onSubmit = async (values: z.infer<typeof formSchema>) => {
         try {
             const userMessage: OpenAI.Chat.ChatCompletionMessageParam = {role: "user", content: values.prompt};

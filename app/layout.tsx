@@ -6,6 +6,7 @@ import { ruRU } from "@clerk/localizations";
 import {ModalProvider} from "@/components/modal-provider";
 import {ToasterProvider} from "@/components/toaster-provider";
 import {CrispProvider} from "@/components/crisp-provider";
+import {CancelProModal} from "@/components/cancel-pro-modal";
 
 const inter = Inter({subsets: ['latin']})
 
